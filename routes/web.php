@@ -30,3 +30,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','role:admin'])->group
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::get('/', [ProductCatalogController::class, 'index'])->name('shop.index'); 
+Route::get('/produk/{product:slug}', [ProductCatalogController::class, 'show'])->name('shop.show'); 

@@ -19,6 +19,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 });
 
+Route::prefix('admin')->name('admin.')->middleware(['auth','role:admin'])->group(function () { 
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index'); 
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store'); 
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update'); 
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy'); 
+    Route::resource('products', AdminProductController::class)->except('show'); 
+}); 
+
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');

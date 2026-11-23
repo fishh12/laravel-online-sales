@@ -40,3 +40,11 @@ class User extends Authenticatable
         return $this->role === 'admin'; 
     } 
 } 
+use Laravel\Sanctum\HasApiTokens; 
+ 
+class User extends Authenticatable 
+{ 
+    use HasApiTokens, HasFactory, Notifiable; 
+ 
+    // kode model lama tetap dipertahankan 
+} 
